@@ -6,6 +6,8 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { ethers } from 'ethers';
 import { uploadMemoryBlob } from './storageUpload.js';
 import { ensureAgentRegistered, anchorMemoryRoot } from './registryAnchor.js';
@@ -223,6 +225,18 @@ app.get('/api/access/check', async (req, res) => {
     console.error('[Access] Error:', err.message);
     res.status(500).json({ error: err.message });
   }
+});
+
+// ── Serve Frontend (Production) ─────────────────────────
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const distPath = path.join(__dirname, '..', 'dist');
+
+app.use(express.static(distPath));
+
+// SPA fallback — serve index.html for all non-API routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(distPath, 'index.html'));
 });
 
 // ── Start ───────────────────────────────────────────────
