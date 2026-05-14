@@ -272,11 +272,22 @@ export default function App() {
   return (
     <div className="app-root">
       <div className="scanline-overlay" />
-      <div className={`sidebar-wrapper ${sidebarOpen ? 'open' : 'closed'}`}>
+      <div
+          className={`sidebar-wrapper ${sidebarOpen ? 'open' : 'closed'}`}
+          onClick={(e) => {
+            // Close sidebar when tapping the backdrop (not the sidebar itself)
+            if (e.target === e.currentTarget && window.innerWidth <= 768) {
+              setSidebarOpen(false);
+            }
+          }}
+        >
         <Sidebar
           sessions={sortedSessions}
           activeSessionId={activeSessionId}
-          onSessionChange={setActiveSessionId}
+          onSessionChange={(id) => {
+            setActiveSessionId(id);
+            if (window.innerWidth <= 768) setSidebarOpen(false);
+          }}
           onNewSession={handleNewSession}
           onDeleteSession={handleDeleteSession}
           onRenameSession={handleSessionRename}
