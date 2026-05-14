@@ -159,7 +159,7 @@ export default function App() {
     if (userId) setMessageCount(getMessageCount(userId));
   }, [userId]);
 
-  // Check on-chain access
+  // Check onchain access
   const refreshAccess = useCallback(async () => {
     if (!walletAddress) { setAccessInfo(null); return; }
     try {

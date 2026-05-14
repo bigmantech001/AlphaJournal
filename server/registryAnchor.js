@@ -1,5 +1,5 @@
 // ============================================================
-// MemoriaDA SDK — Server-Side Registry Anchoring
+// MemoriaDA SDK - Server-Side Registry Anchoring
 // ============================================================
 
 import 'dotenv/config';
@@ -42,7 +42,7 @@ export async function ensureAgentRegistered(agentId, framework) {
     await contract.getAgent(agentId);
     return true; // already registered
   } catch {
-    // Not registered — register now
+    // Not registered - register now
     const tx = await contract.registerAgent(agentId, framework);
     await tx.wait().catch(() => {}); // ignore receipt polling errors
     return true;

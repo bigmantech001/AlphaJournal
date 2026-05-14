@@ -111,7 +111,7 @@ export default function PaywallModal({ accessInfo, walletAddress, onAccessGrante
           <div className="subscription-countdown">
             <Clock size={14} />
             <span className="countdown-text">
-              Subscription active — <strong>{countdown.text}</strong>
+              Subscription active - <strong>{countdown.text}</strong>
             </span>
           </div>
         )}
@@ -154,7 +154,7 @@ export default function PaywallModal({ accessInfo, walletAddress, onAccessGrante
                 rel="noopener noreferrer"
                 className="tx-link"
               >
-                View transaction ↗
+                View transaction �-
               </a>
             )}
           </div>
@@ -193,7 +193,7 @@ export default function PaywallModal({ accessInfo, walletAddress, onAccessGrante
         </div>
 
         <p className="paywall-coming-soon">
-          🔜 0G Pay integration coming soon — pay with any token, any chain
+          🔜 0G Pay integration coming soon - pay with any token, any chain
         </p>
 
         {error && <p className="paywall-error">⚠️ {error}</p>}

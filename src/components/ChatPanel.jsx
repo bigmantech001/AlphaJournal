@@ -21,7 +21,7 @@ import PaywallModal from './PaywallModal';
 import { FREE_MESSAGE_LIMIT } from '../services/accessService';
 
 /* ── System prompt for the AI ── */
-const SYSTEM_PROMPT = `You are Alpha — an AI trading journal assistant. The user logs their crypto trading thoughts, market analysis, and investment theses with you.
+const SYSTEM_PROMPT = `You are Alpha - an AI trading journal assistant. The user logs their crypto trading thoughts, market analysis, and investment theses with you.
 
 Your job:
 - Help them organize and recall their trading ideas
@@ -109,7 +109,7 @@ function AgentMessage({ content, memoriesRecalled, anchorInfo, timestamp }) {
           <div className="anchor-log">
             <Shield size={10} />
             <span className="anchor-text">
-              ✓ Anchored on 0G Chain — {anchorInfo.blockLabel}
+              ✓ Anchored on 0G Chain - {anchorInfo.blockLabel}
             </span>
             <a
               href={anchorInfo.explorerUrl}
@@ -135,7 +135,7 @@ const WELCOME_MSG = {
   role: 'agent',
   content: `Welcome to Alpha Journal 📓
 
-I'm Alpha — your AI trading companion. Dump your trading thoughts, theses, and market reads here. I'll remember everything across sessions.
+I'm Alpha - your AI trading companion. Dump your trading thoughts, theses, and market reads here. I'll remember everything across sessions.
 
 Ask me things like:
 • "Why did I short BTC last month?"
@@ -288,7 +288,7 @@ export default function ChatPanel({
       };
       setMessages(prev => [...prev, agentMsg]);
 
-      // 6. Background: store memory on 0G Storage + anchor on-chain
+      // 6. Background: store memory on 0G Storage + anchor onchain
       setTypingStatus('Anchoring to 0G Chain');
       const conversationText = `User: ${trimmed}\nAlpha: ${aiContent}`;
       try {
@@ -428,7 +428,7 @@ export default function ChatPanel({
               <Wallet size={20} />
               <div className="connect-wallet-text">
                 <span className="connect-wallet-title">Connect your wallet to start journaling</span>
-                <span className="connect-wallet-desc">Your wallet is your identity — no emails, no passwords</span>
+                <span className="connect-wallet-desc">Your wallet is your identity - no emails, no passwords</span>
               </div>
               <button className="connect-wallet-btn" onClick={onConnectWallet}>
                 <Wallet size={14} />

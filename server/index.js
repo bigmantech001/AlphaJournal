@@ -1,5 +1,5 @@
 // ============================================================
-// Alpha Journal — Backend Server
+// Alpha Journal - Backend Server
 // Powered by MemoriaDA Protocol
 // ============================================================
 
@@ -45,7 +45,7 @@ function saveUsers(set) {
 
 const uniqueUsers = loadUsers();
 
-// ── Real on-chain stats cache ──────────────────────────
+// ── Real onchain stats cache ──────────────────────────
 let onChainStats = { memoryCount: 0, agentCount: 0, lastFetched: 0 };
 
 async function fetchOnChainStats() {
@@ -76,9 +76,9 @@ async function fetchOnChainStats() {
     } catch {}
 
     onChainStats.lastFetched = Date.now();
-    console.log(`[Stats] On-chain: ${onChainStats.memoryCount} memories, ${onChainStats.agentCount} agents`);
+    console.log(`[Stats] Onchain: ${onChainStats.memoryCount} memories, ${onChainStats.agentCount} agents`);
   } catch (err) {
-    console.error('[Stats] Failed to fetch on-chain stats:', err.message);
+    console.error('[Stats] Failed to fetch onchain stats:', err.message);
   }
 }
 
@@ -91,8 +91,8 @@ app.use(express.json({ limit: '5mb' }));
 
 // ── Health / Stats ─────────────────────────────────────
 app.get('/api/status', (req, res) => {
-  // memoryCount: use on-chain vectorCount (real anchored memories)
-  // Fall back to in-memory count if on-chain hasn't been fetched yet
+  // memoryCount: use onchain vectorCount (real anchored memories)
+  // Fall back to in-memory count if onchain hasn't been fetched yet
   const totalMemories = Math.max(onChainStats.memoryCount, memoryCount);
 
   res.json({ 
@@ -151,10 +151,10 @@ app.post('/api/memory/store', async (req, res) => {
     const uploadResult = await uploadMemoryBlob(JSON.stringify(memoryPayload));
     console.log(`[Memory] Stored ✓ root: ${uploadResult.rootHash.slice(0, 16)}...`);
 
-    // 3. Ensure agent is registered on-chain
+    // 3. Ensure agent is registered onchain
     await ensureAgentRegistered(AGENT_ID, FRAMEWORK);
 
-    // 4. Anchor memory root on-chain
+    // 4. Anchor memory root onchain
     memoryCount++;
     console.log('[Memory] Anchoring on 0G Chain...');
     const anchorResult = await anchorMemoryRoot(AGENT_ID, uploadResult.rootHash, memoryCount);
@@ -175,7 +175,7 @@ app.post('/api/memory/store', async (req, res) => {
   }
 });
 
-// ── Access Check (On-chain subscription/balance) ────────
+// ── Access Check (Onchain subscription/balance) ────────
 
 const ACCESS_ABI = [
   'function isActive(address user) external view returns (bool)',
@@ -202,7 +202,7 @@ app.get('/api/access/check', async (req, res) => {
 
     const provider = new ethers.JsonRpcProvider(RPC_URL);
 
-    // ── If the access contract is deployed, use on-chain logic ──
+    // ── If the access contract is deployed, use onchain logic ──
     if (ACCESS_CONTRACT) {
       const contract = new ethers.Contract(ACCESS_CONTRACT, ACCESS_ABI, provider);
       const [isActiveNow, expiry, balance, isLifetimeOnChain] = await contract.getAccessInfo(address);
@@ -225,8 +225,8 @@ app.get('/api/access/check', async (req, res) => {
       return;
     }
 
-    // ── No contract deployed — fall back to native balance check ──
-    console.warn('[Access] Contract not deployed — using balance-only check');
+    // ── No contract deployed - fall back to native balance check ──
+    console.warn('[Access] Contract not deployed - using balance-only check');
     const balance = await provider.getBalance(address);
 
     const isHolder = balance >= HOLDER_THRESHOLD;  // ≥ 2 0G → holder / lifetime
@@ -238,7 +238,7 @@ app.get('/api/access/check', async (req, res) => {
       balance: balance.toString(),
       isLifetime: isHolder,
       tier: isHolder ? 'holder' : 'free',
-      warning: 'Access contract not deployed — using balance check only',
+      warning: 'Access contract not deployed - using balance check only',
     });
   } catch (err) {
     console.error('[Access] Error:', err.message);
@@ -253,7 +253,7 @@ const distPath = path.join(__dirname, '..', 'dist');
 
 app.use(express.static(distPath));
 
-// SPA fallback — serve index.html for all non-API routes
+// SPA fallback - serve index.html for all non-API routes
 app.get('*', (req, res) => {
   res.sendFile(path.join(distPath, 'index.html'));
 });
@@ -262,7 +262,7 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
   console.log('');
   console.log('═══════════════════════════════════════════');
-  console.log('  ALPHA JOURNAL — Backend Server');
+  console.log('  ALPHA JOURNAL - Backend Server');
   console.log('  Powered by MemoriaDA Protocol');
   console.log('═══════════════════════════════════════════');
   console.log(`  Listening: http://localhost:${PORT}`);

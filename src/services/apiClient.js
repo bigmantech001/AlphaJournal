@@ -1,5 +1,5 @@
 // ============================================================
-// Alpha Journal — API Client (Frontend → Backend)
+// Alpha Journal - API Client (Frontend → Backend)
 // ============================================================
 
 const API_BASE = '/api';

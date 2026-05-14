@@ -1,5 +1,5 @@
 // ============================================================
-// Alpha Journal — Access Service (On-chain access check)
+// Alpha Journal - Access Service (Onchain access check)
 // ============================================================
 
 const API_BASE = '/api';

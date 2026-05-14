@@ -1,10 +1,10 @@
 # 📓 Alpha Journal
 
-**AI-Powered Decentralized Trading Diary — Built on 0G Chain**
+**AI-Powered Decentralized Trading Diary - Built on 0G Chain**
 
 Alpha Journal is an intelligent trading journal that lets crypto traders capture their market theses, trade rationales, and alpha insights in natural language. Every conversation is cryptographically anchored on the **0G Aristotle Mainnet** via the **MemoriaDA** protocol, creating a tamper-proof, verifiable record of your trading decisions.
 
-> *"Why did I short BTC last month?"* — Alpha remembers.
+> *"Why did I short BTC last month?"* - Alpha remembers.
 
 ---
 
@@ -15,13 +15,13 @@ Alpha Journal is an intelligent trading journal that lets crypto traders capture
 - Vector similarity search across your entire journal history
 - Context-aware responses that reference your past entries naturally
 
-### 🔗 On-Chain Memory Anchoring
+### �- Onchain Memory Anchoring
 - Every journal entry is uploaded to **0G Decentralized Storage**
 - Merkle roots are committed to the **0G Chain** via the MemoriaDA Registry
 - Each anchored memory includes a verifiable explorer link
 
 ### 🔐 Wallet-Native Authentication
-- No emails, no passwords — your wallet is your identity
+- No emails, no passwords - your wallet is your identity
 - MetaMask auto-switching to 0G Mainnet
 - Session isolation per wallet address
 
@@ -34,11 +34,11 @@ Alpha Journal is an intelligent trading journal that lets crypto traders capture
 - **Free Tier**: 3 messages to try the experience
 - **Subscriber**: 0.1 0G token / month for unlimited access
 - **Holder**: Hold 0.2+ 0G tokens for lifetime access
-- On-chain access verification via the AlphaJournalAccess smart contract
+- Onchain access verification via the AlphaJournalAccess smart contract
 
 ---
 
-## 🏗️ Architecture
+## �-️ Architecture
 
 ```
 ┌─────────────────────────────────────────────────┐
@@ -52,8 +52,8 @@ Alpha Journal is an intelligent trading journal that lets crypto traders capture
 │                                                   │
 │  /api/chat          → OpenAI (GPT-4o-mini)       │
 │  /api/memory/store  → 0G Storage + Chain Anchor  │
-│  /api/access/check  → On-chain subscription      │
-│  /api/status        → Live on-chain stats         │
+│  /api/access/check  → Onchain subscription      │
+│  /api/status        → Live onchain stats         │
 └──────┬───────────────────┬──────────────────────┘
        │                   │
 ┌──────▼──────┐    ┌───────▼──────────────────────┐
@@ -100,7 +100,7 @@ npm install
 Create a `.env` file in the project root:
 
 ```env
-# AlphaJournal — 0G Mainnet Configuration
+# AlphaJournal - 0G Mainnet Configuration
 VITE_PRIVATE_KEY=<your_server_wallet_private_key>
 
 # MemoriaDA Shared Registry (DO NOT CHANGE)
@@ -138,10 +138,10 @@ npm run dev:all
 Or run them separately:
 
 ```bash
-# Terminal 1 — Backend (Express API server)
+# Terminal 1 - Backend (Express API server)
 npm run server
 
-# Terminal 2 — Frontend (Vite dev server)
+# Terminal 2 - Frontend (Vite dev server)
 npm run dev
 ```
 
@@ -175,7 +175,7 @@ Alpha Journal runs on the **0G Aristotle Mainnet**:
 
 ### MemoriaDA Registry V2 (Shared)
 
-The shared registry contract that anchors memory roots on-chain. Alpha Journal's agent identity:
+The shared registry contract that anchors memory roots onchain. Alpha Journal's agent identity:
 
 | Field | Value |
 |-------|-------|
@@ -184,16 +184,16 @@ The shared registry contract that anchors memory roots on-chain. Alpha Journal's
 | Framework | `AlphaJournal` |
 
 Key functions used:
-- `registerAgent(agentId, framework)` — One-time agent registration (mints ERC-721 NFT)
-- `updateMemoryRoot(agentId, rootHash, vectorCount)` — Anchor a memory (0.001 0G fee)
-- `getAgent(agentId)` — Query agent state
-- `verifyMemoryRoot(agentId, rootHash)` — Verify a specific memory root
+- `registerAgent(agentId, framework)` - One-time agent registration (mints ERC-721 NFT)
+- `updateMemoryRoot(agentId, rootHash, vectorCount)` - Anchor a memory (0.001 0G fee)
+- `getAgent(agentId)` - Query agent state
+- `verifyMemoryRoot(agentId, rootHash)` - Verify a specific memory root
 
 ### AlphaJournalAccess
 
 Subscription/access control contract managing user tiers:
-- `subscribe()` — Pay subscription fee for 30 days of access
-- `getAccessInfo(address)` — Check user's access status, expiry, and balance
+- `subscribe()` - Pay subscription fee for 30 days of access
+- `getAccessInfo(address)` - Check user's access status, expiry, and balance
 
 ---
 
@@ -238,8 +238,8 @@ Set all `.env` variables in Railway's dashboard.
 ### Configuration
 
 The `package.json` includes:
-- `"engines": { "node": ">=20.0.0" }` — Required for 0G SDK compatibility
-- `"start": "node server/index.js"` — Railway start command
+- `"engines": { "node": ">=20.0.0" }` - Required for 0G SDK compatibility
+- `"start": "node server/index.js"` - Railway start command
 
 ### Build & Deploy
 
@@ -296,10 +296,10 @@ AlphaJournal/
 
 ---
 
-## 🔗 Related Projects
+## �- Related Projects
 
-- **[MemoriaDA](https://memoriada.xyz)** — Decentralized memory anchoring protocol
-- **[0G Labs](https://0g.ai)** — Modular AI blockchain infrastructure
+- **[MemoriaDA](https://memoriada.xyz)** - Decentralized memory anchoring protocol
+- **[0G Labs](https://0g.ai)** - Modular AI blockchain infrastructure
 
 ---
 

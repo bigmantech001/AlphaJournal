@@ -1,5 +1,5 @@
 // ============================================================
-// MemoriaDA SDK — Server-Side 0G Storage Upload
+// MemoriaDA SDK - Server-Side 0G Storage Upload
 // ============================================================
 
 import 'dotenv/config';

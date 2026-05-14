@@ -71,7 +71,7 @@ const TERMINAL_LINES = [
   { type: 'ai', text: 'Searching memory vaults', typing: true },
   { type: 'system', text: '🧠 3 memories recalled from 0G Storage' },
   { type: 'ai', text: 'You shorted BTC on May 3rd at $67,800 based on your resistance thesis.' },
-  { type: 'system', text: '✓ Anchored on 0G Chain — Block #8,412,093' },
+  { type: 'system', text: '✓ Anchored on 0G Chain - Block #8,412,093' },
 ];
 
 function TerminalDemo() {
@@ -94,7 +94,7 @@ function TerminalDemo() {
       return () => clearTimeout(timer);
     }
 
-    // Line done — pause then show next
+    // Line done - pause then show next
     const delay = currentLine.type === 'user' ? 800 : currentLine.type === 'system' ? 600 : 1000;
     const timer = setTimeout(() => {
       setVisibleLines(v => v + 1);
@@ -221,7 +221,7 @@ export default function LandingPage({ onLaunch, authenticated, onLogin }) {
 
         <p className="hero-subtitle">
           An AI-powered decentralized trading diary. Dump your market theses, trade setups,
-          and alpha — every memory is cryptographically anchored on
+          and alpha - every memory is cryptographically anchored on
           <span className="text-neon"> 0G Chain</span> via the
           <span className="text-purple"> MemoriaDA</span> protocol.
         </p>
@@ -250,7 +250,7 @@ export default function LandingPage({ onLaunch, authenticated, onLogin }) {
               <span className="dot-yellow"></span>
               <span className="dot-green"></span>
             </div>
-            <span className="terminal-title">alpha-journal — live session</span>
+            <span className="terminal-title">alpha-journal - live session</span>
             <span className="terminal-live-badge">
               <span className="live-pulse" />
               LIVE
@@ -263,12 +263,12 @@ export default function LandingPage({ onLaunch, authenticated, onLogin }) {
       <section className={`features ${featuresVisible ? 'reveal' : ''}`} ref={featuresRef}>
         <div className="features-grid">
           {[
-            { icon: Brain, title: 'AI Memory Recall', desc: 'Ask "Why did I enter that trade?" — Alpha recalls your exact reasoning from months ago using vector similarity search.', color: 'icon-neon' },
-            { icon: Database, title: '0G Decentralized Storage', desc: 'Every journal entry is uploaded to 0G\'s decentralized storage network. Your data lives on-chain, self-sovereign and secure.', color: 'icon-purple' },
+            { icon: Brain, title: 'AI Memory Recall', desc: 'Ask "Why did I enter that trade?" - Alpha recalls your exact reasoning from months ago using vector similarity search.', color: 'icon-neon' },
+            { icon: Database, title: '0G Decentralized Storage', desc: 'Every journal entry is uploaded to 0G\'s decentralized storage network. Your data lives onchain, self-sovereign and secure.', color: 'icon-purple' },
             { icon: Shield, title: 'Cryptographic Anchoring', desc: 'Merkle roots of your memories are committed to 0G Chain. Tamper-proof, verifiable, and permanently immutable.', color: 'icon-cyan' },
             { icon: Wallet, title: 'Wallet-Native Auth', desc: 'No emails or passwords. Your wallet is your identity. Secure, private, and built for crypto traders.', color: 'icon-neon' },
-            { icon: Zap, title: 'Instant Responses', desc: 'Blockchain storage and anchoring happen asynchronously. Enjoy a high-speed AI experience with zero on-chain latency.', color: 'icon-purple' },
-            { icon: Eye, title: 'On-Chain Verifiable', desc: 'Every anchored memory includes an explorer link. Verify your data integrity directly on the 0G Chain block explorer.', color: 'icon-cyan' },
+            { icon: Zap, title: 'Instant Responses', desc: 'Blockchain storage and anchoring happen asynchronously. Enjoy a high-speed AI experience with zero onchain latency.', color: 'icon-purple' },
+            { icon: Eye, title: 'Onchain Verifiable', desc: 'Every anchored memory includes an explorer link. Verify your data integrity directly on the 0G Chain block explorer.', color: 'icon-cyan' },
           ].map((feat, i) => (
             <div
               key={feat.title}
@@ -333,7 +333,7 @@ export default function LandingPage({ onLaunch, authenticated, onLogin }) {
             <div className="step-number">02</div>
             <div className="step-content">
               <h4>Dump Your Alpha</h4>
-              <p>Type your trading thesis. Alpha AI handles the 0G storage and on-chain anchoring.</p>
+              <p>Type your trading thesis. Alpha AI handles the 0G storage and onchain anchoring.</p>
             </div>
           </div>
           <div className="step-connector"><ChevronRight size={16} /></div>
@@ -341,7 +341,7 @@ export default function LandingPage({ onLaunch, authenticated, onLogin }) {
             <div className="step-number">03</div>
             <div className="step-content">
               <h4>Recall Anytime</h4>
-              <p>Ask "Why did I short ETH?" — Alpha searches your decentralized memory vaults.</p>
+              <p>Ask "Why did I short ETH?" - Alpha searches your decentralized memory vaults.</p>
             </div>
           </div>
         </div>

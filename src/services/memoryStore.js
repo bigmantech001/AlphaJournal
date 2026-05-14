@@ -1,5 +1,5 @@
 // ============================================================
-// Alpha Journal — Local Memory Index (in-browser vector search)
+// Alpha Journal - Local Memory Index (in-browser vector search)
 // ============================================================
 
 class MemoryStore {
