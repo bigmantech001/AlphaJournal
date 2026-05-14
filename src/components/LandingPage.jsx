@@ -193,7 +193,7 @@ export default function LandingPage({ onLaunch, authenticated, onLogin }) {
             <span className="landing-logo-text">Alpha Journal</span>
           </div>
           <div className="landing-nav-links">
-            <a href="https://github.com/mrnetwork0001/MemoriaDA" target="_blank" rel="noopener noreferrer" className="nav-link">
+            <a href="https://github.com/bigmantech001/AlphaJournal" target="_blank" rel="noopener noreferrer" className="nav-link">
               <GitBranch size={14} />
               GitHub
             </a>
@@ -233,7 +233,7 @@ export default function LandingPage({ onLaunch, authenticated, onLogin }) {
             <ArrowRight size={18} />
           </button>
           <a
-            href="https://github.com/mrnetwork0001/MemoriaDA"
+            href="https://github.com/bigmantech001/AlphaJournal"
             target="_blank"
             rel="noopener noreferrer"
             className="hero-secondary"
