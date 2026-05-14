@@ -7,6 +7,7 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { ethers } from 'ethers';
 import { uploadMemoryBlob } from './storageUpload.js';
@@ -25,7 +26,24 @@ const openai = new OpenAI({
 const AGENT_ID = 'alpha_journal_agent_v1';
 const FRAMEWORK = 'AlphaJournal';
 let memoryCount = 0;
-const uniqueUsers = new Set();
+
+// ── Persistent unique users tracking ───────────────────
+const __fn = fileURLToPath(import.meta.url);
+const __dn = path.dirname(__fn);
+const USERS_FILE = path.join(__dn, '..', '.users.json');
+
+function loadUsers() {
+  try {
+    const raw = fs.readFileSync(USERS_FILE, 'utf8');
+    return new Set(JSON.parse(raw));
+  } catch { return new Set(); }
+}
+
+function saveUsers(set) {
+  try { fs.writeFileSync(USERS_FILE, JSON.stringify([...set])); } catch {}
+}
+
+const uniqueUsers = loadUsers();
 
 // ── Real on-chain stats cache ──────────────────────────
 let onChainStats = { memoryCount: 0, agentCount: 0, lastFetched: 0 };
@@ -180,6 +198,7 @@ app.get('/api/access/check', async (req, res) => {
     }
 
     uniqueUsers.add(address.toLowerCase());
+    saveUsers(uniqueUsers);
 
     const provider = new ethers.JsonRpcProvider(RPC_URL);
 

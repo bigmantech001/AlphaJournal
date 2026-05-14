@@ -27,6 +27,8 @@
     "wagmi": "^2.12.31"
   },
   "devDependencies": {
+    "@nomicfoundation/hardhat-ethers": "^4.0.11",
+    "@nomicfoundation/hardhat-network-helpers": "^3.0.8",
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
     "@vitejs/plugin-react": "^4.3.3",
     "hardhat": "^2.22.15",
