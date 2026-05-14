@@ -1,4 +1,4 @@
-# 📓 Alpha Journal
+# Alpha Journal
 
 **AI trading diary with permanent, verifiable memory on 0G Chain — your alpha, cryptographically secured forever.**
 
@@ -26,7 +26,7 @@ Alpha Journal is an AI-powered trading diary where every conversation is automat
 
 ---
 
-## 🔗 Live Demo
+## Live Demo
 
 | Resource | Link |
 |----------|------|
@@ -38,7 +38,7 @@ Alpha Journal is an AI-powered trading diary where every conversation is automat
 
 ---
 
-## 🔥 Traction (Real Usage on 0G Mainnet)
+## Traction (Real Usage on 0G Mainnet)
 
 All numbers below are verifiable onchain. No fabricated claims.
 
@@ -54,7 +54,7 @@ All numbers below are verifiable onchain. No fabricated claims.
 
 ---
 
-## 📜 0G Integration Proof
+## 0G Integration Proof
 
 ### Deployed Mainnet Contracts
 
@@ -86,7 +86,7 @@ All numbers below are verifiable onchain. No fabricated claims.
 
 ---
 
-## ⚙️ Architecture
+## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────┐
@@ -143,7 +143,7 @@ User sends message
 
 ---
 
-## ✨ Features
+## Features
 
 - **AI Memory Recall** — Ask "Why did I enter that trade?" and Alpha recalls your exact reasoning from months ago using vector similarity search
 - **Onchain Memory Anchoring** — Every journal entry uploaded to 0G Storage with Merkle roots committed to 0G Chain
@@ -156,7 +156,7 @@ User sends message
 
 ---
 
-## 🔧 Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |-------|------------|
@@ -172,7 +172,7 @@ User sends message
 
 ---
 
-## 🚀 Local Setup (For Judges)
+## Local Setup (For Judges)
 
 ### Prerequisites
 
@@ -242,11 +242,11 @@ npm run dev:all
    - Anchored on **0G Chain** (registry transaction)
    - Verified with an **explorer link** in the chat
 
-> 💡 **Judge tip**: You can also try the live deployment at [alphajournal.online](https://alphajournal.online) without any local setup.
+> **Judge tip**: You can also try the live deployment at [alphajournal.online](https://alphajournal.online) without any local setup.
 
 ---
 
-## 📡 Network Configuration
+## Network Configuration
 
 | Parameter | Value |
 |-----------|-------|
@@ -260,7 +260,7 @@ npm run dev:all
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 AlphaJournal/
@@ -300,7 +300,7 @@ AlphaJournal/
 
 ---
 
-## 🚢 Production Deployment (Railway)
+## Production Deployment (Railway)
 
 ### Build & Deploy
 
@@ -317,7 +317,7 @@ Set all `.env` variables in Railway's dashboard. Key settings:
 
 ---
 
-## 🔗 Related Projects
+## Related Projects
 
 - **[MemoriaDA](https://memoriada.xyz)** — Decentralized memory anchoring protocol (parent infrastructure)
 - **[SolTutor](https://soltutor.memoriada.xyz)** — AI Solidity tutor built on MemoriaDA
@@ -326,7 +326,7 @@ Set all `.env` variables in Railway's dashboard. Key settings:
 
 ---
 
-## 📄 License
+## License
 
 MIT
 
