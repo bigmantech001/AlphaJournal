@@ -33,6 +33,7 @@ Alpha Journal is an AI-powered trading diary where every conversation is automat
 | **Live App** | [alphajournal.online](https://alphajournal.online) |
 | **GitHub** | [github.com/bigmantech001/AlphaJournal](https://github.com/bigmantech001/AlphaJournal) |
 | **Demo Video** | [Watch on YouTube](TODO_ADD_DEMO_VIDEO_LINK) |
+| **Public X Post** | [View on X](TODO_ADD_X_POST_LINK) |
 | **MemoriaDA Protocol** | [memoriada.xyz](https://memoriada.xyz) |
 
 ---
