@@ -125,6 +125,8 @@ app.post('/api/chat', async (req, res) => {
     const { messages } = req.body;
     if (!messages) return res.status(400).json({ error: 'messages required' });
 
+    console.log(`[Chat] Sending to ${AI_MODEL} via ${AI_BASE_URL}...`);
+
     const completion = await openai.chat.completions.create({
       model: AI_MODEL,
       messages,
@@ -132,13 +134,29 @@ app.post('/api/chat', async (req, res) => {
       temperature: 0.8,
     });
 
+    // Safely extract content — 0G Compute API may structure responses differently
+    const content =
+      completion?.choices?.[0]?.message?.content
+      || completion?.choices?.[0]?.text
+      || completion?.content
+      || null;
+
+    if (!content) {
+      console.error('[Chat] Empty response from AI. Full response:', JSON.stringify(completion, null, 2));
+      return res.status(502).json({ error: 'AI returned an empty response. Please try again.' });
+    }
+
+    console.log(`[Chat] Response OK (${content.length} chars)`);
+
     res.json({
-      content: completion.choices[0].message.content,
-      model: completion.model,
+      content,
+      model: completion.model || AI_MODEL,
     });
   } catch (err) {
     console.error('[Chat] Error:', err.message);
-    res.status(500).json({ error: err.message });
+    // Surface useful error details
+    const detail = err?.error?.message || err?.response?.data?.error?.message || err.message || 'Unknown AI error';
+    res.status(500).json({ error: detail });
   }
 });
 

@@ -100,7 +100,7 @@ function AgentMessage({ content, memoriesRecalled, anchorInfo, timestamp }) {
           </div>
         )}
         <div className="bubble bubble-agent">
-          {content.split('\n').map((line, i) => {
+          {(content || '').split('\n').map((line, i) => {
             if (!line.trim()) return <br key={i} />;
             return <p key={i}>{formatMarkdown(line)}</p>;
           })}
