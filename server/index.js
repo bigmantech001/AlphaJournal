@@ -130,18 +130,34 @@ app.post('/api/chat', async (req, res) => {
     const completion = await openai.chat.completions.create({
       model: AI_MODEL,
       messages,
-      max_tokens: 500,
+      max_tokens: 2048,
       temperature: 0.8,
     });
 
-    // Safely extract content — 0G Compute API may structure responses differently
+    // The 0G model (0GM-1.0-35B-A3B) is a reasoning model:
+    //   - It puts chain-of-thought into `reasoning_content`
+    //   - The final answer goes into `content`
+    //   - If max_tokens is too low, all tokens go to reasoning and content is null
+    const choice = completion?.choices?.[0];
     const content =
-      completion?.choices?.[0]?.message?.content
-      || completion?.choices?.[0]?.text
-      || completion?.content
+      choice?.message?.content
+      || choice?.text
       || null;
 
     if (!content) {
+      // If only reasoning was produced, extract the useful part from it
+      const reasoning = choice?.message?.reasoning_content;
+      if (reasoning) {
+        console.warn('[Chat] No content but reasoning available — extracting response from reasoning');
+        // Try to find the draft/final answer in the reasoning text
+        const draftMatch = reasoning.match(/(?:Draft|Final|Response|Answer)[^:]*:\s*([\s\S]+?)(?:\n\n\d\.|\n\n\*\*|$)/i);
+        const extracted = draftMatch ? draftMatch[1].trim() : reasoning.slice(-500).trim();
+        return res.json({
+          content: extracted,
+          model: completion.model || AI_MODEL,
+        });
+      }
+
       console.error('[Chat] Empty response from AI. Full response:', JSON.stringify(completion, null, 2));
       return res.status(502).json({ error: 'AI returned an empty response. Please try again.' });
     }

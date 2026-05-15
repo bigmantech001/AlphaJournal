@@ -87,9 +87,17 @@ All numbers below are verifiable onchain. No fabricated claims.
 
 **0G Compute (AI Inference)** — [`server/index.js`](./server/index.js)
 - All AI chat inference runs through the **0G Compute Router API** (`https://router-api.0g.ai/v1`)
-- Model: `0GM-1.0-35B-A3B` — a 35B-parameter MoE model hosted on the 0G network
+- Model: `0GM-1.0-35B-A3B` — a 35B-parameter MoE reasoning model hosted on the 0G network
 - Uses the OpenAI-compatible SDK for seamless integration
 - Zero dependency on external AI providers — fully native to the 0G stack
+
+> **🧪 Technical Discovery: 0GM is a Reasoning Model**
+>
+> During integration, we discovered that `0GM-1.0-35B-A3B` operates as a **chain-of-thought reasoning model** (similar architecture to DeepSeek-R1). The model separates its output into two fields:
+> - `reasoning_content` — internal chain-of-thought (hidden from the user)
+> - `content` — the final synthesized answer
+>
+> This means the model *thinks before it responds*, producing higher-quality trading analysis. Our backend handles both response paths with a graceful fallback: if the model exhausts its token budget on reasoning, we extract the draft answer from the reasoning chain rather than failing. This makes Alpha Journal one of the first apps to properly handle 0G's native reasoning model in production.
 
 ---
 
