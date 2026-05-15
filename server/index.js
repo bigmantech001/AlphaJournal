@@ -17,11 +17,17 @@ import OpenAI from 'openai';
 const app = express();
 const PORT = process.env.PORT || 3002;
 
-// AI Client
+// AI Client — 0G Compute Router API (OpenAI-compatible)
+const AI_API_KEY = process.env.ZG_CHAT_API_KEY || process.env.OPENAI_API_KEY || 'dummy';
+const AI_BASE_URL = process.env.ZG_CHAT_BASE_URL || process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1';
+const AI_MODEL = process.env.ZG_CHAT_MODEL || process.env.OPENAI_MODEL || 'gpt-4o-mini';
+
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY || 'dummy',
-  baseURL: process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1',
+  apiKey: AI_API_KEY,
+  baseURL: AI_BASE_URL,
 });
+
+console.log(`[AI] Using model: ${AI_MODEL} via ${AI_BASE_URL}`);
 
 const AGENT_ID = 'alpha_journal_agent_v1';
 const FRAMEWORK = 'AlphaJournal';
@@ -120,7 +126,7 @@ app.post('/api/chat', async (req, res) => {
     if (!messages) return res.status(400).json({ error: 'messages required' });
 
     const completion = await openai.chat.completions.create({
-      model: process.env.OPENAI_MODEL || 'gpt-4o-mini',
+      model: AI_MODEL,
       messages,
       max_tokens: 500,
       temperature: 0.8,

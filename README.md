@@ -21,6 +21,7 @@ Alpha Journal is an AI-powered trading diary where every conversation is automat
 | Component | Usage |
 |-----------|-------|
 | **0G Storage** | Every journal entry is uploaded as a Merkle-verified memory blob to 0G's decentralized storage network |
+| **0G Compute** | AI inference powered by 0G Compute Router API using the `0GM-1.0-35B-A3B` model — no external AI providers |
 | **0G Chain** | Agent Identity NFT (ERC-721) minted via MemoriaDA Registry + memory roots anchored onchain per conversation |
 | **0G Chain** | AlphaJournalAccess smart contract handles subscription payments and holder verification natively onchain |
 
@@ -78,11 +79,17 @@ All numbers below are verifiable onchain. No fabricated claims.
 - Each anchor costs 0.001 0G (micropayment fee), creating real protocol revenue
 - Users see a verifiable explorer link after every anchored memory
 
-**0G Chain (Access Control)** - [`contracts/AlphaJournalAccess.sol`](./contracts/AlphaJournalAccess.sol)
+**0G Chain (Access Control)** — [`contracts/AlphaJournalAccess.sol`](./contracts/AlphaJournalAccess.sol)
 - Smart contract manages subscription payments (0.1 0G/month) and holder verification (0.2+ 0G = lifetime)
-- `subscribe()` - user pays onchain, gets 30 days of unlimited access
-- `getAccessInfo(address)` - backend verifies access status onchain before granting entry
+- `subscribe()` — user pays onchain, gets 30 days of unlimited access
+- `getAccessInfo(address)` — backend verifies access status onchain before granting entry
 - Real revenue collected in 0G tokens
+
+**0G Compute (AI Inference)** — [`server/index.js`](./server/index.js)
+- All AI chat inference runs through the **0G Compute Router API** (`https://router-api.0g.ai/v1`)
+- Model: `0GM-1.0-35B-A3B` — a 35B-parameter MoE model hosted on the 0G network
+- Uses the OpenAI-compatible SDK for seamless integration
+- Zero dependency on external AI providers — fully native to the 0G stack
 
 ---
 
@@ -98,17 +105,17 @@ All numbers below are verifiable onchain. No fabricated claims.
 ┌──────────────────▼──────────────────────────────────┐
 │              Backend (Express.js)                     │
 │                                                       │
-│  /api/chat          → AI Inference (GPT-4o-mini)     │
+│  /api/chat          → 0G Compute (0GM-1.0-35B-A3B)  │
 │  /api/memory/store  → 0G Storage + Chain Anchor      │
 │  /api/access/check  → Onchain subscription check     │
 │  /api/status        → Live onchain stats             │
-└──────┬───────────────────┬──────────────────────────┘
-       │                   │
-┌──────▼──────┐    ┌───────▼──────────────────────────┐
-│  0G Storage  │    │  0G Chain (Aristotle Mainnet)     │
-│  Blob Upload │    │  MemoriaDA Registry V2            │
-│  Merkle Tree │    │  AlphaJournalAccess Contract      │
-└─────────────┘    └──────────────────────────────────┘
+└──────┬──────────┬────────┬──────────────────────────┘
+       │          │        │
+┌──────▼──────┐ ┌─▼──────┐ ┌▼─────────────────────────┐
+│  0G Storage  │ │  0G    │ │  0G Chain (Aristotle)     │
+│  Blob Upload │ │Compute │ │  MemoriaDA Registry V2    │
+│  Merkle Tree │ │ Router │ │  AlphaJournalAccess       │
+└─────────────┘ └────────┘ └──────────────────────────┘
 ```
 
 ### Memory Flow (Per Conversation)
@@ -118,8 +125,8 @@ User sends message
        │
        ▼
 ┌──────────────────┐
-│ 1. AI Response   │  0GM-1.0-35B-A3B generates context-aware reply
-│    (instant)     │  using vector-searched past memories
+│ 1. AI Response   │  0G Compute (0GM-1.0-35B-A3B) generates
+│    (instant)     │  context-aware reply via 0G Router API
 └──────┬───────────┘
        │
        ▼
@@ -162,7 +169,7 @@ User sends message
 |-------|------------|
 | Frontend | React 18, Vite 5, Lucide Icons |
 | Backend | Express.js, Node 20+ |
-| AI | 0GM-1.0-35B-A3B (via compatible API) |
+| AI | 0G Compute Router API — `0GM-1.0-35B-A3B` (35B MoE) |
 | Blockchain | ethers.js v6, 0G Chain (EVM) |
 | Storage | 0G Decentralized Storage (`@0gfoundation/0g-ts-sdk`) |
 | Registry | MemoriaDA Registry V2 (shared onchain contract) |
