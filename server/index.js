@@ -38,9 +38,7 @@ const __fn = fileURLToPath(import.meta.url);
 const __dn = path.dirname(__fn);
 const USERS_FILE = path.join(__dn, '..', '.users.json');
 
-// Base offsets to recover counts lost during ephemeral server restarts
-const BASE_USERS = 2; // +1 from yourself = 3 active users
-const BASE_MEMORIES = 12; // Base anchored memories before the reset bug
+// No artificial offsets — stats come from real onchain data + .users.json
 
 function loadUsers() {
   try {
@@ -105,9 +103,9 @@ app.use(express.json({ limit: '5mb' }));
 
 // ── Health / Stats ─────────────────────────────────────
 app.get('/api/status', (req, res) => {
-  // memoryCount: use onchain vectorCount + base offset to recover lost data
-  const totalMemories = Math.max(onChainStats.memoryCount, memoryCount) + BASE_MEMORIES;
-  const totalUsers = uniqueUsers.size + BASE_USERS;
+  // Real stats only — onchain vectorCount + persisted unique users
+  const totalMemories = Math.max(onChainStats.memoryCount, memoryCount);
+  const totalUsers = uniqueUsers.size;
 
   res.json({ 
     status: 'ok', 
@@ -204,7 +202,7 @@ app.post('/api/memory/store', async (req, res) => {
 
     // 4. Anchor memory root onchain
     memoryCount++;
-    const actualVectorCount = memoryCount + BASE_MEMORIES; // Submit real recovered count to chain
+    const actualVectorCount = memoryCount; // Submit real count to chain — no inflation
     
     console.log('[Memory] Anchoring on 0G Chain...');
     const anchorResult = await anchorMemoryRoot(AGENT_ID, uploadResult.rootHash, actualVectorCount);
